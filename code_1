@@ -1,0 +1,20 @@
+ArzWait wait = new ArzWait();
+		wait.waiting(60*60000);
+		ArzStatusMonitor monitor = new ArzStatusMonitor();
+		boolean fileCount = monitor.monitorFile(Environment, Period);
+
+		HdfsFileRead read = new HdfsFileRead();
+		wait.waiting(60*60000);
+		boolean hdfsfileComp = read.hdfsfilecompares(Environment, Period);
+
+		IdbLDBValidations idbLdbComparation = new IdbLDBValidations();
+		wait.waiting(60*60000);
+		boolean idbldbcomp = idbLdbComparation.ldbVsIdbCompare(Environment,
+				Period);
+
+		LdbImpalaValidation validations = new LdbImpalaValidation();
+		boolean impalaQueryValidations = validations.impalaQueriesValidation(
+				Environment, Period);
+
+		flag = (fileCount && hdfsfileComp && idbldbcomp && impalaQueryValidations);
+		return flag;
