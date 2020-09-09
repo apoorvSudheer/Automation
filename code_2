@@ -1,7 +1,0 @@
-public void waiting(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-	}
